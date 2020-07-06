@@ -229,7 +229,7 @@ class DiMaria implements ContainerInterface
         $paramInfo = [];
         foreach ($method->getParameters() as $param) {
             $paramType = $param->hasType() ? $param->getType() : null;
-            $paramType = $paramType ? $paramType->isBuiltin() ? null : $paramType->__toString() : null;
+            $paramType = $paramType ? $paramType->isBuiltin() ? null : ($paramType instanceof \ReflectionNamedType ? $paramType->getName() : null) : null;
             $paramInfo[$param->name] = [
                 'name' => $param->name,
                 'optional' => $param->isOptional(),
